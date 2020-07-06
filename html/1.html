@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Canvas</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <canvas id="test" width="1300" height="800"></canvas>
+  <script>
+    // canvas初始化
+    var canvas;
+    var ctx;
+
+    // 初始化
+    function init(){
+      canvas = document.getElementById('test');
+      // 检测支持性
+      if (!canvas.getContext) return;
+      ctx = canvas.getContext('2d');
+      console.log(ctx);
+      // draw1();
+      draw2();
+      draw3();
+    }
+    init();
+    // 绘制矩形
+    function draw1() {
+      // 1、设置背景颜色
+      ctx.fillStyle = 'rgba(200,0,0)'
+      // 2、绘制一个填充的矩形(需要先设置颜色)新建
+      ctx.fillRect(50, 150, 50, 50);
+
+      ctx.fillStyle = 'rgba(180,0,0)'
+      ctx.fillRect(50, 80, 60, 60)
+      // 3、绘制一个矩形边框
+      ctx.strokeRect(50, 250, 50, 2);
+      // 4、清除矩形
+      ctx.clearRect(50, 250, 50, 6);
+    }
+    // 绘制路径-三角形
+    function draw2(){
+      // 1、新建一条路劲
+      ctx.beginPath();
+      // 2、把画笔移动到指定的坐标，设置起点坐标
+      ctx.moveTo(50,50);
+      // 3、绘制一条从当前位置(50,50)到指定坐标(200,50)的直线
+      ctx.lineTo(200,50);
+      ctx.lineTo(200,200);
+      // 4、闭合路径，会拉一条从当前点到path起始点的直线，如果当前点与起始点重合，则什么都不做
+      ctx.closePath();
+      // 绘制路径
+      ctx.stroke();
+    }
+    // 绘制路径-填充三角形
+    function draw3(){
+      ctx.beginPath();
+      ctx.moveTo(320,50);
+      ctx.lineTo(400,50);
+      ctx.lineTo(400,400);
+      ctx.closePath();
+      ctx.stroke();
+      ctx.fill();
+    }
+  </script>
+</body>
+
+</html>
